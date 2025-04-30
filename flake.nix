@@ -26,9 +26,10 @@
         entry = "app.ts";
 
         # additional libraries and executables to add to gjs' runtime
-        extraPackages = [
+        extraPackages = with pkgs; [
           # ags.packages.${system}.battery
           # pkgs.fzf
+          libnotify
         ];
       };
     };
