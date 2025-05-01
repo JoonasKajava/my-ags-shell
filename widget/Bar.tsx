@@ -1,6 +1,7 @@
 import { App, Astal, Gtk, Gdk } from "astal/gtk3";
 import { Variable } from "astal";
 import { execAsync } from "astal/process";
+import { icons } from "./icons";
 
 const time = Variable("").poll(1000, "date");
 
@@ -20,14 +21,17 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
           Welcome to AGS!
         </button>
         <box />
-        <button
-          onClicked={() =>
-            execAsync(["bash", "-c", `notify-send "Testing!!!!"`])
-          }
-          halign={Gtk.Align.CENTER}
-        >
-          <label label={time()} />
-        </button>
+        <box halign={Gtk.Align.END}>
+          <button
+            onClicked={() =>
+              execAsync(["bash", "-c", `notify-send "Testing!!!!"`])
+            }
+            halign={Gtk.Align.CENTER}
+          >
+            <label label={time()} />
+          </button>
+          <label label={time((value) => `${icons.calendar} ${value}`)} />
+        </box>
       </centerbox>
     </window>
   );
